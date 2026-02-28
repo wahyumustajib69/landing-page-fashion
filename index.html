@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FashionHub - Modern Fashion Marketplace</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .navbar {
+            background: #fff;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .nav-link {
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: #d4af37 !important;
+        }
+
+        .mega-menu {
+            width: 100%;
+            left: 0;
+            right: 0;
+            padding: 30px;
+        }
+
+        .hero-slider img {
+            height: 80vh;
+            object-fit: cover;
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .product-card {
+            transition: .3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #d4af37;
+            color: #fff;
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 20px;
+        }
+
+        .rating i {
+            color: #ffc107;
+        }
+
+        .countdown-box {
+            background: #000;
+            color: #fff;
+            padding: 40px;
+            border-radius: 15px;
+        }
+
+        .newsletter {
+            background: #f8f9fa;
+        }
+
+        footer {
+            background: #111;
+            color: #ccc;
+        }
+
+        footer a {
+            color: #ccc;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #d4af37;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all .8s ease;
+        }
+
+        .fade-in.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .product-card {
+            overflow: hidden;
+            position: relative
+        }
+
+        .product-card img {
+            transition: .4s
+        }
+
+        .product-card:hover img.second-img {
+            opacity: 1
+        }
+
+        .product-card img.second-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: .4s
+        }
+
+        .wishlist {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #fff;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: .3s
+        }
+
+        .wishlist:hover {
+            background: #000;
+            color: #fff
+        }
+
+        .cart-animation {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #000;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 30px;
+            display: none;
+            z-index: 9999
+        }
+
+        .trending-section {
+            background: #f8f9fa;
+            padding: 80px 0;
+        }
+
+        .product-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: 0.3s ease;
+            background: #fff;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-card img {
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .price {
+            font-weight: 600;
+            color: #000;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: red;
+            color: white;
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 20px;
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: #000;
+            border-radius: 50%;
+            padding: 20px;
+        }
+
+        :root {
+            --primary-purple: #7b2ff7;
+            --secondary-purple: #c74de3;
+            --dark-purple: #5f1bd1;
+            --light-purple: #f3e8ff;
+        }
+
+        /* Gradient Background Utility */
+        .gradient-purple {
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
+            color: white;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: linear-gradient(90deg, var(--primary-purple), var(--secondary-purple));
+        }
+
+        .navbar .nav-link,
+        .navbar-brand {
+            color: white !important;
+        }
+
+        .navbar .nav-link:hover {
+            color: #ffd6ff !important;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--dark-purple), var(--primary-purple));
+        }
+
+        .btn-outline-primary {
+            border-color: var(--primary-purple);
+            color: var(--primary-purple);
+        }
+
+        .btn-outline-primary:hover {
+            background: var(--primary-purple);
+            color: white;
+        }
+
+        /* Section Background */
+        .section-light {
+            background: var(--light-purple);
+        }
+
+        /* Badge */
+        .discount-badge {
+            background: linear-gradient(45deg, #ff00cc, #7b2ff7);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(90deg, #5f1bd1, #c74de3);
+            color: white;
+        }
+
+        /* Icon Hover */
+        .nav-link i,
+        footer i {
+            transition: 0.3s ease;
+        }
+
+        .nav-link:hover i,
+        footer i:hover {
+            transform: scale(1.2);
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(123, 47, 247, 0.3);
+        }
+
+        .badge.bg-danger {
+            background: #ff4dd2 !important;
+        }
+
+        .badge.bg-dark {
+            background: #7b2ff7 !important;
+        }
+
+        #contact {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+
+        #contact.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .form-control:focus {
+            border-color: #7b2ff7;
+            box-shadow: 0 0 0 0.2rem rgba(123, 47, 247, 0.25);
+        }
+
+        .parallax-section {
+            height: 450px;
+            background: linear-gradient(rgba(123, 47, 247, 0.7),
+                    rgba(160, 68, 255, 0.7)),
+                url('https://images.unsplash.com/photo-1717766430321-d8390f663932') no-repeat center center;
+
+            background-size: cover;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        /* Mobile Fix (Disable fixed for smoother mobile scroll) */
+        @media (max-width: 900px) {
+            .parallax-section {
+                background-attachment: scroll;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="#">FashionHub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item dropdown position-static">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Categories</a>
+                        <div class="dropdown-menu mega-menu shadow border-0">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h6>Men</h6>
+                                    <a class="dropdown-item" href="#">Shirts</a>
+                                    <a class="dropdown-item" href="#">Jackets</a>
+                                    <a class="dropdown-item" href="#">Shoes</a>
+                                </div>
+                                <div class="col-md-3">
+                                    <h6>Women</h6>
+                                    <a class="dropdown-item" href="#">Dresses</a>
+                                    <a class="dropdown-item" href="#">Heels</a>
+                                    <a class="dropdown-item" href="#">Bags</a>
+                                </div>
+                                <div class="col-md-3">
+                                    <h6>Kids</h6>
+                                    <a class="dropdown-item" href="#">T-Shirts</a>
+                                    <a class="dropdown-item" href="#">Sneakers</a>
+                                </div>
+                                <div class="col-md-3">
+                                    <h6>Sale</h6>
+                                    <a class="dropdown-item text-danger" href="#">Up to 70% Off</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link" href="#featured">Featured</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#trendingCarousel">Trending</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonial</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#faq">Faq</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item me-3">
+                        <a href="#" class="nav-link position-relative">
+                            <i class="bi bi-heart fs-5"></i>
+                            <span id="wishlistCount"
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                0
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link position-relative">
+                            <i class="bi bi-cart3 fs-5"></i>
+                            <span id="cartCount"
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
+                                0
+                            </span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Slider -->
+    <div id="heroCarousel" class="carousel slide hero-slider" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5" class="d-block w-100">
+                <div class="carousel-caption">
+                    <h1 class="fw-bold">New Collection 2026</h1>
+                    <p>Discover The Latest Trends</p>
+                    <a href="#" class="btn btn-dark">Shop Now</a>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d" class="d-block w-100">
+                <div class="carousel-caption">
+                    <h1 class="fw-bold">Up To 70% Off</h1>
+                    <p>Limited Time Offer</p>
+                    <a href="#" class="btn btn-warning">Explore Sale</a>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://images.unsplash.com/photo-1595665593673-bf1ad72905c0" class="d-block w-100">
+                <div class="carousel-caption">
+                    <h1 class="fw-bold">Up To 70% Off</h1>
+                    <p>Limited Time Offer</p>
+                    <a href="#" class="btn btn-warning">Explore Sale</a>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://images.unsplash.com/photo-1637228393246-c38a4b3d2011" class="d-block w-100">
+                <div class="carousel-caption">
+                    <h1 class="fw-bold">Up To 70% Off</h1>
+                    <p>Limited Time Offer</p>
+                    <a href="#" class="btn btn-warning">Explore Sale</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Promo Countdown -->
+    <section class="gradient-purple text-center py-4">
+        <div class="container fade-in">
+            <div class="countdown-box ">
+                <h2 class="fw-bold mb-3">Flash Sale - Up To 70% Off</h2>
+                <p id="countdown" class="fs-4"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section id="featured" class="section-padding">
+        <div class="container">
+
+            <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
+
+                <h2 class="fw-bold mb-0 text-primary">Featured Products</h2>
+
+                <div class="d-flex gap-2 flex-wrap">
+
+                    <input type="text" id="searchInput" class="form-control text-primary"
+                        placeholder="Search product..." style="width:200px;">
+
+                    <select id="sortSelect" class="form-select w-auto">
+                        <option value="default">Sort By</option>
+                        <option value="low">Price: Low to High</option>
+                        <option value="high">Price: High to Low</option>
+                    </select>
+
+                </div>
+            </div>
+
+            <!-- Category Buttons -->
+            <div class="mb-4 text-center">
+                <button class="btn btn-outline-primary btn-sm filter-btn" data-category="all">All</button>
+                <button class="btn btn-outline-primary btn-sm filter-btn" data-category="men">Men</button>
+                <button class="btn btn-outline-primary btn-sm filter-btn" data-category="women">Women</button>
+                <button class="btn btn-outline-primary btn-sm filter-btn"
+                    data-category="accessories">Accessories</button>
+            </div>
+
+            <div class="row g-4" id="productList">
+
+                <!-- Product Card -->
+                <div class="col-md-3 product-item" data-price="120">
+                    <div class="card product-card">
+                        <span class="discount-badge">-30%</span>
+
+                        <div class="wishlist"><i class="bi bi-heart"></i></div>
+
+                        <div class="position-relative">
+                            <img src="https://plus.unsplash.com/premium_photo-1708274912111-b90268373de5"
+                                class="card-img-top">
+                            <img src="https://images.unsplash.com/photo-1520975916090-3105956dac38" class="second-img">
+                        </div>
+
+                        <div class="card-body text-center">
+                            <h6>Modern Jacket</h6>
+                            <p class="fw-bold">$120</p>
+
+                            <button class="btn btn-primary btn-sm quick-view-btn" data-price="$120" data-category="men"
+                                data-name="Modern Jacket"
+                                data-img="https://images.unsplash.com/photo-1520975922203-beb6d64c96fd">
+                                Quick View
+                            </button>
+
+                            <button class="btn btn-outline-primary btn-sm add-to-cart">Add to Cart</button>
+                            <!-- Rating -->
+                            <div class="mb-2 text-warning">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-half"></i>
+                            </div>
+
+                            <div>
+                                <span class="price">$49</span>
+                                <span class="old-price">$69</span>
+                            </div>
+
+                            <div class="d-flex justify-content-center gap-2 mt-3">
+
+                                <!-- Add to Cart -->
+                                <button class="btn btn-primary btn-sm add-to-cart">
+                                    <i class="bi bi-cart-plus"></i> Add
+                                </button>
+
+                                <!-- Wishlist -->
+                                <button class="btn btn-outline-danger btn-sm wishlist-btn">
+                                    <i class="bi bi-heart"></i>
+                                </button>
+
+                                <!-- Quick View -->
+                                <button class="btn btn-outline-success btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#quickViewModal">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Duplicate product cards with different prices -->
+                <div class="col-md-3 product-item" data-price="75">
+                    <div class="card product-card">
+                        <div class="wishlist"><i class="bi bi-heart"></i></div>
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb"
+                                class="card-img-top">
+                            <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246" class="second-img">
+                        </div>
+                        <div class="card-body text-center">
+                            <h6>Classic Sneakers</h6>
+                            <p class="fw-bold">$75</p>
+                            <button class="btn btn-primary btn-sm quick-view-btn" data-price="$75" data-category="all"
+                                data-name="Classic Sneakers"
+                                data-img="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb">
+                                Quick View
+                            </button>
+                            <button class="btn btn-outline-primary btn-sm add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="col-md-3 product-item" data-price="95">
+                    <div class="card product-card">
+                        <span class="discount-badge">-25%</span>
+                        <div class="wishlist"><i class="bi bi-heart"></i></div>
+
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1598532163257-ae3c6b2524b6"
+                                class="card-img-top">
+                            <img src="https://plus.unsplash.com/premium_photo-1664392147011-2a720f214e01"
+                                class="second-img">
+                        </div>
+
+                        <div class="card-body text-center">
+                            <h6>Premium Leather Bag</h6>
+                            <p class="fw-bold">$95</p>
+
+                            <button class="btn btn-primary btn-sm quick-view-btn" data-price="$95"
+                                data-category="accessories" data-name="Premium Leather Bag"
+                                data-img="https://images.unsplash.com/photo-1495121605193-b116b5b09a1e">
+                                Quick View
+                            </button>
+
+                            <button class="btn btn-outline-primary btn-sm add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="col-md-3 product-item" data-price="60">
+                    <div class="card product-card">
+                        <span class="discount-badge">-40%</span>
+                        <div class="wishlist"><i class="bi bi-heart"></i></div>
+
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f"
+                                class="card-img-top">
+                            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9" class="second-img">
+                        </div>
+
+                        <div class="card-body text-center">
+                            <h6>Minimalist Watch</h6>
+                            <p class="fw-bold">$60</p>
+
+                            <button class="btn btn-primary btn-sm quick-view-btn" data-price="$60" data-category="men"
+                                data-name="Minimalist Watch"
+                                data-img="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f">
+                                Quick View
+                            </button>
+
+                            <button class="btn btn-outline-primary btn-sm add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="col-md-3 product-item" data-price="45">
+                    <div class="card product-card">
+                        <span class="discount-badge">-15%</span>
+                        <div class="wishlist"><i class="bi bi-heart"></i></div>
+
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1520975916090-3105956dac38"
+                                class="card-img-top">
+                            <img src="https://images.unsplash.com/photo-1544441893-675973e31985" class="second-img">
+                        </div>
+
+                        <div class="card-body text-center">
+                            <h6>Casual T-Shirt</h6>
+                            <p class="fw-bold">$45</p>
+
+                            <button class="btn btn-primary btn-sm quick-view-btn" data-price="$45" data-category="men"
+                                data-name="Casual T-Shirt"
+                                data-img="https://images.unsplash.com/photo-1520975916090-3105956dac38">
+                                Quick View
+                            </button>
+
+                            <button class="btn btn-outline-primary btn-sm add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 6 -->
+                <div class="col-md-3 product-item" data-price="130">
+                    <div class="card product-card">
+                        <span class="discount-badge">-35%</span>
+                        <div class="wishlist"><i class="bi bi-heart"></i></div>
+
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c"
+                                class="card-img-top">
+                            <img src="https://images.unsplash.com/photo-1521334884684-d80222895322" class="second-img">
+                        </div>
+
+                        <div class="card-body text-center">
+                            <h6>Luxury Coat</h6>
+                            <p class="fw-bold">$130</p>
+
+                            <button class="btn btn-primary btn-sm quick-view-btn" data-price="$130" data-category="men"
+                                data-title="Modern Jacket"
+                                data-img="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c">
+                                Quick View
+                            </button>
+
+                            <button class="btn btn-outline-primary btn-sm add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Pagination -->
+            <nav class="mt-5 bg-light p-3 rounded text-center">
+                <ul class="pagination justify-content-center" id="pagination"></ul>
+            </nav>
+
+        </div>
+    </section>
+
+    <div class="modal fade" id="quickViewModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-3">
+                <div class="modal-body text-center">
+                    <img id="modalImg" class="img-fluid mb-3">
+                    <h5 id="modalTitle"></h5>
+                    <p id="modalPrice" class="fw-bold"></p>
+                    <button class="btn btn-primary">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cart-animation" id="cartAnim">
+        Added to Cart ✔
+    </div>
+
+    <section class="parallax-section d-flex align-items-center text-center text-white">
+        <div class="container">
+            <h2 class="fw-bold display-5">Elevate Your Fashion Experience</h2>
+            <p class="lead mt-3">Discover exclusive collections and limited-time offers</p>
+            <a href="#" class="btn btn-primary btn-lg mt-3">Explore Now</a>
+        </div>
+    </section>
+
+    <section class="trending-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold text-primary">🔥 Trending Products</h2>
+                <p class="text-muted">Most popular items this week</p>
+            </div>
+
+            <div id="trendingCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+
+                    <!-- Slide 1 -->
+                    <div class="carousel-item active">
+                        <div class="row g-4">
+
+                            <!-- Product 1 -->
+                            <div class="col-md-3">
+                                <div class="card product-card position-relative">
+                                    <span class="discount-badge">-30%</span>
+                                    <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c"
+                                        class="card-img-top">
+                                    <div class="card-body text-center">
+                                        <h6>Premium Shirt</h6>
+                                        <div>
+                                            <span class="price">$49</span>
+                                            <span class="old-price">$69</span>
+                                        </div>
+                                        <button class="btn btn-primary btn-sm mt-3 w-100">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product 2 -->
+                            <div class="col-md-3">
+                                <div class="card product-card">
+                                    <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5"
+                                        class="card-img-top">
+                                    <div class="card-body text-center">
+                                        <h6>Modern Jacket</h6>
+                                        <div>
+                                            <span class="price">$89</span>
+                                        </div>
+                                        <button class="btn btn-primary btn-sm mt-3 w-100">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product 3 -->
+                            <div class="col-md-3">
+                                <div class="card product-card">
+                                    <img src="https://images.unsplash.com/photo-1608667508764-33cf0726b13a"
+                                        class="card-img-top">
+                                    <div class="card-body text-center">
+                                        <h6>Street Sneakers</h6>
+                                        <div>
+                                            <span class="price">$120</span>
+                                        </div>
+                                        <button class="btn btn-primary btn-sm mt-3 w-100">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product 4 -->
+                            <div class="col-md-3">
+                                <div class="card product-card">
+                                    <img src="https://images.unsplash.com/photo-1624687943971-e86af76d57de"
+                                        class="card-img-top">
+                                    <div class="card-body text-center">
+                                        <h6>Leather Bag</h6>
+                                        <div>
+                                            <span class="price">$150</span>
+                                        </div>
+                                        <button class="btn btn-primary btn-sm mt-3 w-100">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="carousel-item">
+                        <div class="row g-4">
+
+                            <div class="col-md-3">
+                                <div class="card product-card">
+                                    <img src="https://images.unsplash.com/photo-1612722432474-b971cdcea546"
+                                        class="card-img-top">
+                                    <div class="card-body text-center">
+                                        <h6>Elegant Dress</h6>
+                                        <span class="price">$99</span>
+                                        <button class="btn btn-primary btn-sm mt-3 w-100">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="card product-card">
+                                    <img src="https://images.unsplash.com/photo-1542496658-e33a6d0d50f6"
+                                        class="card-img-top">
+                                    <div class="card-body text-center">
+                                        <h6>Luxury Watch</h6>
+                                        <span class="price">$199</span>
+                                        <button class="btn btn-primary btn-sm mt-3 w-100">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="card product-card">
+                                    <img src="https://images.unsplash.com/photo-1535043934128-cf0b28d52f95"
+                                        class="card-img-top">
+                                    <div class="card-body text-center">
+                                        <h6>High Heels</h6>
+                                        <span class="price">$75</span>
+                                        <button class="btn btn-primary btn-sm mt-3 w-100">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="card product-card">
+                                    <img src="https://images.unsplash.com/photo-1556306535-0f09a537f0a3"
+                                        class="card-img-top">
+                                    <div class="card-body text-center">
+                                        <h6>Casual Cap</h6>
+                                        <span class="price">$29</span>
+                                        <button class="btn btn-primary btn-sm mt-3 w-100">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Controls -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#trendingCarousel"
+                    data-bs-slide="prev">
+                    <i class="carousel-control-prev-icon"></i>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#trendingCarousel"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="section-padding newsletter text-center gradient-purple text-white">
+        <div class="container fade-in">
+            <h3 class="fw-bold mb-3">Subscribe To Our Newsletter</h3>
+            <p>Get exclusive offers and fashion updates</p>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <input type="email" class="form-control" placeholder="Enter your email">
+                        <button class="btn btn-primary">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section-padding bg-light">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-5 fade-in text-primary">What Our Customers Say</h2>
+
+            <div id="testimonialCarousel" class="carousel slide fade-in" data-bs-ride="carousel">
+                <div class="carousel-inner">
+
+                    <!-- Testimonial 1 -->
+                    <div class="carousel-item active">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="card border-0 shadow-sm p-4 text-center">
+                                    <img src="https://randomuser.me/api/portraits/women/44.jpg"
+                                        class="rounded-circle mx-auto mb-3" width="90" height="90">
+                                    <h5 class="fw-bold mb-1">Sarah Johnson</h5>
+                                    <div class="rating mb-2">
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                    </div>
+                                    <p class="text-muted">
+                                        “Absolutely love the quality! Fast shipping and the product looks even better in
+                                        person.”
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="carousel-item">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="card border-0 shadow-sm p-4 text-center">
+                                    <img src="https://randomuser.me/api/portraits/men/32.jpg"
+                                        class="rounded-circle mx-auto mb-3" width="90" height="90">
+                                    <h5 class="fw-bold mb-1">Michael Brown</h5>
+                                    <div class="rating mb-2">
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-half text-warning"></i>
+                                    </div>
+                                    <p class="text-muted">
+                                        “Great shopping experience. The discounts are real and customer service is very
+                                        helpful.”
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="carousel-item">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="card border-0 shadow-sm p-4 text-center">
+                                    <img src="https://randomuser.me/api/portraits/women/68.jpg"
+                                        class="rounded-circle mx-auto mb-3" width="90" height="90">
+                                    <h5 class="fw-bold mb-1">Emily Carter</h5>
+                                    <div class="rating mb-2">
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star text-warning"></i>
+                                    </div>
+                                    <p class="text-muted">
+                                        “Trendy designs and very affordable prices. I’ll definitely shop here again!”
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Controls -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon bg-dark rounded-circle p-3"></span>
+                </button>
+
+                <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon bg-dark rounded-circle p-3"></span>
+                </button>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="section-padding gradient-purple text-white">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-5 fade-in text-white">Frequently Asked Questions</h2>
+
+            <div class="accordion fade-in" id="faqAccordion">
+
+                <div class="accordion-item border-0 mb-3 shadow-sm rounded-3">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#faq1">
+                            What payment methods do you accept?
+                        </button>
+                    </h2>
+                    <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body text-muted">
+                            We accept credit/debit cards, PayPal, bank transfers, and selected digital wallets for
+                            secure and convenient transactions.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item border-0 mb-3 shadow-sm rounded-3">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#faq2">
+                            How long does shipping take?
+                        </button>
+                    </h2>
+                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body text-muted">
+                            Shipping usually takes 3–7 business days depending on your location. Express delivery
+                            options are also available.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item border-0 mb-3 shadow-sm rounded-3">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#faq3">
+                            Can I return or exchange items?
+                        </button>
+                    </h2>
+                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body text-muted">
+                            Yes, we offer a 14-day return and exchange policy. Items must be unused and in original
+                            packaging.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item border-0 mb-3 shadow-sm rounded-3">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#faq4">
+                            How can I track my order?
+                        </button>
+                    </h2>
+                    <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body text-muted">
+                            Once your order is shipped, you will receive a tracking number via email to monitor your
+                            delivery status.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item border-0 mb-3 shadow-sm rounded-3">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#faq5">
+                            Do you offer international shipping?
+                        </button>
+                    </h2>
+                    <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body text-muted">
+                            Yes, we ship worldwide. Shipping fees and delivery times vary depending on the destination
+                            country.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <section id="contact" class="py-5 section-light">
+        <div class="container">
+            <div class="row align-items-center">
+
+                <!-- Left Content -->
+                <div class="col-lg-5 mb-4 mb-lg-0">
+                    <h2 class="fw-bold mb-3" style="color:#7b2ff7;">Get In Touch</h2>
+                    <p class="text-muted">
+                        Have questions about our products, orders, or promotions?
+                        Our support team is ready to help you.
+                    </p>
+
+                    <div class="mt-4">
+                        <p><i class="bi bi-geo-alt-fill me-2 text-primary"></i> 123 Fashion Street, Semarang</p>
+                        <p><i class="bi bi-envelope-fill me-2 text-primary"></i> support@fashionstore.com</p>
+                        <p><i class="bi bi-telephone-fill me-2 text-primary"></i> +62 8234 567 890</p>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="col-lg-7">
+                    <div class="card shadow-lg border-0 p-4 rounded-4">
+                        <form>
+                            <div class="row g-3">
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Full Name</label>
+                                    <input type="text" class="form-control rounded-3" placeholder="Your Name">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Email Address</label>
+                                    <input type="email" class="form-control rounded-3" placeholder="Your Email">
+                                </div>
+
+                                <div class="col-12">
+                                    <label class="form-label">Subject</label>
+                                    <input type="text" class="form-control rounded-3" placeholder="Subject">
+                                </div>
+
+                                <div class="col-12">
+                                    <label class="form-label">Message</label>
+                                    <textarea class="form-control rounded-3" rows="4"
+                                        placeholder="Write your message..."></textarea>
+                                </div>
+
+                                <div class="col-12 text-end">
+                                    <button type="submit" class="btn btn-primary px-4 py-2 rounded-3">
+                                        <i class="bi bi-send-fill me-2"></i> Send Message
+                                    </button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="pt-5 pb-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>FashionHub</h5>
+                    <p>Your trusted fashion marketplace.</p>
+                </div>
+                <div class="col-md-4">
+                    <h6>Quick Links</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Shop</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h6>Follow Us</h6>
+                    <i class="bi bi-facebook me-2"></i>
+                    <i class="bi bi-instagram me-2"></i>
+                    <i class="bi bi-twitter"></i>
+                    <i class="bi bi-tiktok"></i>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <small>© 2026 FashionHub. All Rights Reserved.</small>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Countdown Timer
+        var countDownDate = new Date().getTime() + (24 * 60 * 60 * 1000);
+        var x = setInterval(function () {
+            var now = new Date().getTime();
+            var distance = countDownDate - now;
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            document.getElementById("countdown").innerHTML = hours + "h "
+                + minutes + "m " + seconds + "s ";
+        }, 1000);
+
+        // Fade In Animation
+        const faders = document.querySelectorAll('.fade-in');
+        const appearOptions = { threshold: 0.3 };
+        const appearOnScroll = new IntersectionObserver(function (entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('show');
+                observer.unobserve(entry.target);
+            });
+        }, appearOptions);
+        faders.forEach(fader => { appearOnScroll.observe(fader); });
+
+        // Quick View
+        document.querySelectorAll('.quick-view-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.getElementById('modalTitle').innerText = this.dataset.title;
+                document.getElementById('modalPrice').innerText = this.dataset.price;
+                document.getElementById('modalImg').src = this.dataset.img;
+                new bootstrap.Modal(document.getElementById('quickViewModal')).show();
+            });
+        });
+
+        // Add to Cart Animation
+        document.querySelectorAll('.add-to-cart').forEach(btn => {
+            btn.addEventListener('click', function () {
+                let anim = document.getElementById('cartAnim');
+                anim.style.display = 'block';
+                setTimeout(() => { anim.style.display = 'none' }, 1500);
+            });
+        });
+
+        // Sort
+        document.getElementById('sortSelect').addEventListener('change', function () {
+            let products = [...document.querySelectorAll('.product-item')];
+            let container = document.getElementById('productList');
+
+            if (this.value === "low") {
+                products.sort((a, b) => a.dataset.price - b.dataset.price);
+            }
+            if (this.value === "high") {
+                products.sort((a, b) => b.dataset.price - a.dataset.price);
+            }
+            products.forEach(p => container.appendChild(p));
+        });
+
+        const productsPerPage = 4;
+        let currentPage = 1;
+
+        const products = [...document.querySelectorAll('.product-item')];
+        const productContainer = document.getElementById('productList');
+        const paginationContainer = document.getElementById('pagination');
+
+        function displayProducts() {
+            productContainer.innerHTML = "";
+            let filtered = products.filter(p => p.style.display !== "none");
+            let start = (currentPage - 1) * productsPerPage;
+            let end = start + productsPerPage;
+            filtered.slice(start, end).forEach(p => productContainer.appendChild(p));
+            renderPagination(filtered.length);
+        }
+
+        function renderPagination(total) {
+            paginationContainer.innerHTML = "";
+            let pages = Math.ceil(total / productsPerPage);
+            for (let i = 1; i <= pages; i++) {
+                let li = document.createElement('li');
+                li.className = "page-item" + (i === currentPage ? " active" : "");
+                li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+                li.addEventListener('click', () => {
+                    currentPage = i;
+                    displayProducts();
+                });
+                paginationContainer.appendChild(li);
+            }
+        }
+
+        displayProducts();
+
+        /* Wishlist Counter */
+        let wishlistCount = 0;
+        document.querySelectorAll('.wishlist').forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.classList.toggle('active');
+                if (btn.classList.contains('active')) {
+                    wishlistCount++;
+                    btn.style.background = "#000";
+                    btn.style.color = "#fff";
+                } else {
+                    wishlistCount--;
+                    btn.style.background = "#fff";
+                    btn.style.color = "#000";
+                }
+                document.getElementById('wishlistCount').innerText = wishlistCount;
+            });
+        });
+
+        /* Category Filter */
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                let category = btn.dataset.category;
+                products.forEach(p => {
+                    p.style.display = (category === "all" || p.dataset.category === category) ? "block" : "none";
+                });
+                currentPage = 1;
+                displayProducts();
+            });
+        });
+
+        /* Live Search */
+        document.getElementById('searchInput').addEventListener('keyup', function () {
+            let keyword = this.value.toLowerCase();
+            products.forEach(p => {
+                p.style.display = p.dataset.name.toLowerCase().includes(keyword) ? "block" : "none";
+            });
+            currentPage = 1;
+            displayProducts();
+        });
+
+        /* Sort */
+        document.getElementById('sortSelect').addEventListener('change', function () {
+            let sorted = [...products];
+            if (this.value === "low") {
+                sorted.sort((a, b) => a.dataset.price - b.dataset.price);
+            }
+            if (this.value === "high") {
+                sorted.sort((a, b) => b.dataset.price - a.dataset.price);
+            }
+            sorted.forEach(p => productContainer.appendChild(p));
+            displayProducts();
+        });
+
+        window.addEventListener("scroll", function () {
+            const contact = document.querySelector("#contact");
+            const position = contact.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.2;
+
+            if (position < screenPosition) {
+                contact.classList.add("show");
+            }
+        });
+    </script>
+
+</body>
+
+</html>
