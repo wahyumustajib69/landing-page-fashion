@@ -9,4 +9,4 @@
 9. Promotional discount section with countdown timer (e.g., “Up to 70% Off – Limited Time Offer”)
 10. Customer testimonials section and others
 
-    <img width="666" height="3375" alt="Fashion" src="https://github.com/user-attachments/assets/e1dd8d5f-4004-494d-a202-cf1e6d033f2a" />
+    <img width="800" height="3375" alt="Fashion" src="https://github.com/user-attachments/assets/e1dd8d5f-4004-494d-a202-cf1e6d033f2a" />
